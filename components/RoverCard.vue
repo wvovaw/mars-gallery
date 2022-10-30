@@ -22,7 +22,9 @@ const formatedDate = (dateString) => {
     </figure>
     <div class="card-body">
       <h2 class="card-title">
-        {{ rover.name }}
+        <NuxtLink class="link link-hover" :to="`/rovers/${rover.name}`">
+          {{ rover.name }}
+        </NuxtLink>
         <div
           class="badge"
           :class="{
