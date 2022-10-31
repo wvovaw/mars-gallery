@@ -2,7 +2,7 @@
 
 <template>
   <div class="root">
-    <TheNavbar>
+    <TheNavbar class="sticky top-0 z-50">
       <template #navbar-start>
         <label
           tabindex="0"
@@ -13,7 +13,7 @@
         </label>
       </template>
     </TheNavbar>
-    <div class="drawer drawer-mobile">
+    <div class="drawer drawer-mobile relative h-[90dvh]">
       <input id="drawer" type="checkbox" class="drawer-toggle" />
       <slot name="content" />
 

@@ -11,13 +11,16 @@
       </NuxtLink>
     </div>
     <div class="navbar-end">
-      <ul tabindex="0" class="menu menu-horizontal p-0 hidden md:flex">
+      <ul
+        tabindex="0"
+        class="menu menu-compact menu-horizontal p-0 hidden md:flex"
+      >
         <li tabindex="0">
           <NuxtLink to="/rovers" class=""
             >Rovers
             <Icon name="ion:ios-arrow-down" size="1em" />
           </NuxtLink>
-          <ul class="p-2 rounded-box bg-base-100 z-10">
+          <ul class="p-2 rounded-box bg-base-200 z-10">
             <li><NuxtLink to="/rovers/Spirit" class="">Spirit</NuxtLink></li>
             <li>
               <NuxtLink to="/rovers/Opportunity" class="">Opportunity</NuxtLink>

@@ -5,6 +5,8 @@ const rover = await $fetch(`/api/${roverName}/info`);
 
 const selectedSol = ref<Number>(0);
 const selectedCamera = ref<String>("");
+const selectedPhoto = ref<String>("");
+
 let photos = ref([]);
 
 async function getLatestPhotos() {
@@ -43,16 +45,21 @@ onBeforeMount(() => {
               min="0"
               :max="rover.max_sol"
               v-model="selectedSol"
-              class="range range-secondary"
+              class="range range-primary"
             />
           </div>
+          <input
+            type="number"
+            v-model="selectedSol"
+            class="input input-primary"
+          />
         </div>
         <ul class="p-4 overflow-y-scroll w-80 text-base-content">
           <label class="cursor-pointer label">
             <input
               type="radio"
               name="camera"
-              class="radio"
+              class="radio radio-xs"
               value=""
               v-model="selectedCamera"
             />
@@ -62,21 +69,21 @@ onBeforeMount(() => {
             <input
               type="radio"
               name="camera"
-              class="radio"
+              class="radio radio-xs"
               :value="camera.name"
               v-model="selectedCamera"
             />
             <span class="label-text">{{ camera.name }}</span>
           </label>
         </ul>
-        <div class="controls px-4">
-          <button class="btn btn-primary" @click.stop="getPhotos">
+        <div class="px-4 flex row-auto justify-between">
+          <button class="btn btn-primary btn-xl" @click.stop="getPhotos">
             Apply filter
           </button>
-        </div>
-        <div class="divider" />
-        <div class="controls px-4">
-          <button class="btn btn-primary" @click.stop="getLatestPhotos">
+          <button
+            class="btn btn-secondary btn-xl"
+            @click.stop="getLatestPhotos"
+          >
             Show latest
           </button>
         </div>
@@ -87,16 +94,21 @@ onBeforeMount(() => {
         v-if="photosLinks.length == 0"
         class="drawer-content flex items-center justify-center"
       >
-        <div class="alert alert-info shadow-lg m-5 p-5">
+        <div class="alert alert-warning shadow-lg m-5 p-5">
           <div>
             <Icon name="ion:information-circle-outline" size="1em" />
             <div>
-              <h3 class="font-bold">No photos was found.</h3>
+              <h3 class="font-bold">
+                No photos was taken at sol {{ selectedSol }} on selected camera.
+              </h3>
               <div class="text-xs">Try to choose another sol or camera.</div>
             </div>
           </div>
           <div class="flex-none">
-            <button class="btn btn-sm" @click.stop="getLatestPhotos">
+            <button
+              class="btn btn-sm btn-secondary"
+              @click.stop="getLatestPhotos"
+            >
               Show latest
             </button>
           </div>
@@ -104,15 +116,34 @@ onBeforeMount(() => {
       </div>
       <div
         v-else
-        class="drawer-content grid grid-cols-1 md:grid-cols-4 items-center justify-center"
+        class="drawer-content grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 items-center justify-center"
       >
         <figure
           v-for="photo in photosLinks"
           :key="photo"
-          class="p-3 rounded-xl shadow-xl"
+          class="p-3 rounded-xl shadow-xl grid justify-center"
+          @click="selectedPhoto = photo"
         >
-          <img :src="photo" alt="Secret UFO photo" class="rounded-xl" />
+          <img
+            :src="photo"
+            alt="Secret UFO photo"
+            class="rounded-xl"
+            loading="lazy"
+            decoding="async"
+          />
         </figure>
+      </div>
+      <input type="checkbox" id="fullscreen-img-modal" class="modal-toggle" />
+      <div
+        class="modal modal-middle"
+        :class="{ 'modal-open': selectedPhoto.length > 0 }"
+        @click="selectedPhoto = ''"
+      >
+        <div class="modal-box p-0">
+          <figure class="grid justify-center">
+            <img :src="selectedPhoto" alt="Secret UFO photo" />
+          </figure>
+        </div>
       </div>
     </template>
   </NuxtLayout>

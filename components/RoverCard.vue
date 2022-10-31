@@ -18,6 +18,7 @@ const formatedDate = (dateString) => {
         :src="rover.photo"
         :alt="rover.name + 'photo'"
         class="object-cover w-96"
+        height="160px"
       />
     </figure>
     <div class="card-body">
