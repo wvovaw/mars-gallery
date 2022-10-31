@@ -1,34 +1,82 @@
 <script></script>
 
 <template>
-  <nav class="navbar">
+  <nav class="navbar bg-base-100">
     <div class="navbar-start">
-      <button class="btn btn-ghost btn-circle">
-        <Icon name="ion:search" size="2em" />
-      </button>
-      <button class="btn btn-ghost btn-circle">
-        <div class="indicator">
-          <Icon name="ion:ios-bell" size="2em" />
-          <span class="badge badge-xs badge-primary indicator-item"></span>
-        </div>
-      </button>
+      <slot name="navbar-start" />
     </div>
     <div class="navbar-center">
-      <NuxtLink to="/" class="btn btn-ghost normal-case text-xl">MG</NuxtLink>
+      <NuxtLink to="/" class="btn btn-ghost normal-case text-xl">
+        <Icon name="fa6-solid:shuttle-space" size="2em" />
+      </NuxtLink>
     </div>
     <div class="navbar-end">
-      <div class="dropdown dropdown-end" @click="$event.target.blur()">
-        <label tabindex="0" class="btn btn-ghost btn-circle">
-          <Icon name="ion:menu-sharp" size="2em" />
+      <ul tabindex="0" class="menu menu-horizontal p-0 hidden md:flex">
+        <li tabindex="0">
+          <NuxtLink to="/rovers" class=""
+            >Rovers
+            <Icon name="ion:ios-arrow-down" size="1em" />
+          </NuxtLink>
+          <ul class="p-2 rounded-box bg-base-100 z-10">
+            <li><NuxtLink to="/rovers/Spirit" class="">Spirit</NuxtLink></li>
+            <li>
+              <NuxtLink to="/rovers/Opportunity" class="">Opportunity</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="/rovers/Curiosity" class="">Curiosity</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="/rovers/Perseverance" class=""
+                >Perseverance</NuxtLink
+              >
+            </li>
+          </ul>
+        </li>
+        <li><NuxtLink to="/about" class="">About</NuxtLink></li>
+        <div class="divider m-0" />
+        <li>
+          <a href="https://github.com/wvovaw/mars-gallery" class=""
+            ><Icon name="entypo-social:github" />Github</a
+          >
+        </li>
+      </ul>
+      <div class="dropdown dropdown-bottom dropdown-end">
+        <label tabindex="0" class="btn btn-ghost md:hidden">
+          <Icon name="ri:menu-3-fill" size="2em" />
         </label>
         <ul
           tabindex="0"
-          class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+          class="dropdown-content menu menu-compact mt-3 p-2 shadow bg-base-200 rounded-box w-52"
         >
-          <li><NuxtLink to="/" class="">Index</NuxtLink></li>
-          <li><NuxtLink to="/rovers" class="">Rovers</NuxtLink></li>
-          <li><NuxtLink to="/galery" class="">Galery</NuxtLink></li>
+          <li tabindex="0" class="">
+            <NuxtLink to="/rovers" class=""
+              >Rovers
+              <Icon name="ion:ios-arrow-down" size="1em" />
+            </NuxtLink>
+            <ul class="bg-base-300 px-2 mr-2 menu menu-compact relative left-1">
+              <li><NuxtLink to="/rovers/Spirit" class="">Spirit</NuxtLink></li>
+              <li>
+                <NuxtLink to="/rovers/Opportunity" class=""
+                  >Opportunity</NuxtLink
+                >
+              </li>
+              <li>
+                <NuxtLink to="/rovers/Curiosity" class="">Curiosity</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/rovers/Perseverance" class=""
+                  >Perseverance</NuxtLink
+                >
+              </li>
+            </ul>
+          </li>
           <li><NuxtLink to="/about" class="">About</NuxtLink></li>
+          <div class="divider m-0" />
+          <li>
+            <a href="https://github.com/wvovaw/mars-gallery" class=""
+              ><Icon name="entypo-social:github" />Github</a
+            >
+          </li>
         </ul>
       </div>
     </div>
