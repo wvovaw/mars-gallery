@@ -21,18 +21,18 @@
             <Icon name="ion:ios-arrow-down" size="1em" />
           </NuxtLink>
           <ul class="p-2 rounded-box bg-base-200 z-10">
-            <li><NuxtLink to="/rovers/Spirit" class="">Spirit</NuxtLink></li>
-            <li>
-              <NuxtLink to="/rovers/Opportunity" class="">Opportunity</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/rovers/Curiosity" class="">Curiosity</NuxtLink>
-            </li>
             <li>
               <NuxtLink to="/rovers/Perseverance" class=""
                 >Perseverance</NuxtLink
               >
             </li>
+            <li>
+              <NuxtLink to="/rovers/Curiosity" class="">Curiosity</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="/rovers/Opportunity" class="">Opportunity</NuxtLink>
+            </li>
+            <li><NuxtLink to="/rovers/Spirit" class="">Spirit</NuxtLink></li>
           </ul>
         </li>
         <li><NuxtLink to="/about" class="">About</NuxtLink></li>

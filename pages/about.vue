@@ -4,8 +4,8 @@
   <div class="prose m-5">
     <h1>Mars gallery</h1>
     <p>
-      On the site You can watch photos that was taken by different cameras on
-      rovers
+      On this site You can watch photos that was taken by different cameras
+      placed rovers
       <NuxtLink to="/rovers/Spirit" class="hover:text-primary">Spirit</NuxtLink
       >,
       <NuxtLink to="/rovers/Opportunity" class="hover:text-primary"
@@ -20,12 +20,15 @@
       >
       that was sent on mars by
       <a href="https://mars.nasa.gov/" class="hover:text-info"
-        ><Icon name="simple-icons:nasa" size="3rem"
+        ><Icon name="simple-icons:nasa" size="2rem"
       /></a>
+      in cases of unique missions of exploring Mars surface, soil composition
+      and to study the ancient habitability and the potential for
+      <a href="https://youtu.be/AZKcl4-tcuo">life on mars</a>.
     </p>
     <p>
       All available photos loads from NASA's side using
-      <a href="https://github.com/chrisccerami/mars-photo-api/">This API</a>
+      <a href="https://github.com/chrisccerami/mars-photo-api/">This API</a>.
     </p>
   </div>
 </template>
