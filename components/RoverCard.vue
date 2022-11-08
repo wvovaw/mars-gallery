@@ -37,13 +37,9 @@ const formatedDate = (dateString) => {
         </div>
       </h2>
       <div class="w-auto md:w-96 card-actions justify-start">
-        <div
-          class="badge badge-outline"
-          v-for="camera in rover.cameras"
-          :key="camera.id"
-        >
-          <div class="tooltip" :data-tip="camera.full_name">
-            {{ camera.name }}
+        <div class="badge badge-outline" v-for="(value, key) in rover.cameras">
+          <div class="tooltip" :data-tip="value">
+            {{ key }}
           </div>
         </div>
       </div>
@@ -65,7 +61,7 @@ const formatedDate = (dateString) => {
           <div class="stat-figure text-secondary">
             <Icon name="ion:sunny" size="2rem" />
           </div>
-          <div class="stat-title">Sols<abbr> (Mars days)</abbr></div>
+          <div class="stat-title">Sols served<abbr> (Mars days)</abbr></div>
           <div class="stat-value">{{ rover.max_sol }}</div>
         </div>
       </div>
