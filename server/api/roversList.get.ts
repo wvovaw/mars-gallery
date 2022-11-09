@@ -45,28 +45,28 @@ export default defineEventHandler(async (event) => {
       max_date: perseveranceLatest.latest,
       total_photos: perserveranceTotalPhotos.total_results,
       cameras: {
-        NAVCAM_LEFT: "Navigation Camera - Left", // NAVCAM_LEFT
-        NAVCAM_RIGHT: "Navigation Camera - Right", // NAVCAM_RIGHT
-        FRONT_HAZCAM_LEFT: "Front Hazard Avoidance Camera - Left", // FRONT_HAZCAM_LEFT_A|FRONT_HAZCAM_LEFT_B
-        FRONT_HAZCAM_RIGHT: "Front Hazard Avoidance Camera - Right", // FRONT_HAZCAM_RIGHT_A|FRONT_HAZCAM_RIGHT_B
-        REAR_HAZCAM_LEFT: "Rear Hazard Avoidance Camera - Left", // REAR_HAZCAM_LEFT
-        REAR_HAZCAM_RIGHT: "Rear Hazard Avoidance Camera - Right", // |REAR_HAZCAM_RIGHT
-        CACHECAM: "Sample Caching System (CacheCam)", // CACHECAM
-        MCZ_LEFT: "Mast Camera Zoom - Left", // MCZ_LEFT
-        MCZ_RIGHT: "Mast Camera Zoom - Right", // MCZ_RIGHT
-        SKYCAM: "MEDA Skycam", // SKYCAM
-        PIXL_MCC: "PIXL Micro Context Camera", // PIXL_MCC
-        SHERLOC_WATSON: "SHERLOC WATSON Camera", // SHERLOC_WATSON
-        SHERLOC_CI: "SHERLOC Context Imager", // SHERLOC_ACI
-        SUPERCAM_RMI: "SuperCam Remote Micro Imager", // SUPERCAM_RMI
-        EDL_PUCAM1: "Parachute Up-Look Camera A", // EDL_PUCAM1
-        EDL_PUCAM2: "Parachute Up-Look Camera B", // EDL_PUCAM2
-        EDL_DDCAM: "Descent Stage Down-Look Camera", // EDL_DDCAM
-        EDL_RUCAM: "Rover Up-Look Camera", // EDL_RUCAM
-        EDL_RDCAM: "Rover Down-Look Camera", // EDL_RDCAM
-        LCAM: "Lander Vision System Camera", // LCAM
-        HELI_NAV: "Mars Helicopter Navigation Camera", // HELI_NAV
-        HELI_RTE: "Mars Helicopter Color Camera", // HELI_RTE
+        NAVCAM_LEFT:  { name: "Navigation Camera - Left", filter: "NAVCAM_LEFT" },
+        NAVCAM_RIGHT: { name: "Navigation Camera - Right", filter: "NAVCAM_RIGHT" },
+        FRONT_HAZCAM_LEFT: { name: "Front Hazard Avoidance Camera - Left", filter: "FRONT_HAZCAM_LEFT_A|FRONT_HAZCAM_LEFT_B" },
+        FRONT_HAZCAM_RIGHT:{ name: "Front Hazard Avoidance Camera - Right", filter: "FRONT_HAZCAM_RIGHT_A|FRONT_HAZCAM_RIGHT_B" },
+        REAR_HAZCAM_LEFT: { name:"Rear Hazard Avoidance Camera - Left", filter: "REAR_HAZCAM_LEFT" },
+        REAR_HAZCAM_RIGHT: { name:"Rear Hazard Avoidance Camera - Right", filter: "|REAR_HAZCAM_RIGHT" },
+        CACHECAM: { name:"Sample Caching System (CacheCam)", filter: "CACHECAM" },
+        MCZ_LEFT: { name:"Mast Camera Zoom - Left", filter: "MCZ_LEFT" },
+        MCZ_RIGHT: { name:"Mast Camera Zoom - Right", filter: "MCZ_RIGHT" },
+        SKYCAM: { name:"MEDA Skycam", filter: "SKYCAM" },
+        PIXL_MCC: { name:"PIXL Micro Context Camera", filter: "PIXL_MCC" },
+        SHERLOC_WATSON: { name:"SHERLOC WATSON Camera", filter: "SHERLOC_WATSON" },
+        SHERLOC_CI: { name:"SHERLOC Context Imager", filter: "SHERLOC_ACI" },
+        SUPERCAM_RMI: { name:"SuperCam Remote Micro Imager", filter: "SUPERCAM_RMI" },
+        EDL_PUCAM1: { name:"Parachute Up-Look Camera A", filter: "EDL_PUCAM1" },
+        EDL_PUCAM2: { name:"Parachute Up-Look Camera B", filter: "EDL_PUCAM2" },
+        EDL_DDCAM: { name:"Descent Stage Down-Look Camera", filter: "EDL_DDCAM" },
+        EDL_RUCAM: { name:"Rover Up-Look Camera", filter: "EDL_RUCAM" },
+        EDL_RDCAM: { name:"Rover Down-Look Camera", filter: "EDL_RDCAM" },
+        LCAM: { name:"Lander Vision System Camera", filter: "LCAM" },
+        HELI_NAV: { name:"Mars Helicopter Navigation Camera", filter: "HELI_NAV" },
+        HELI_RTE: { name:"Mars Helicopter Color Camera", filter: "HELI_RTE" },
       },
       photo: "/perseverance.png",
     },

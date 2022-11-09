@@ -13,6 +13,9 @@
         </label>
       </template>
     </TheNavbar>
+    <div class="filters pb-2 bg-base-200 drop-shadow-xl">
+      <slot name="filters" />
+    </div>
     <div class="drawer drawer-mobile relative h-[90dvh]">
       <input id="drawer" type="checkbox" class="drawer-toggle" />
       <slot name="content" />
