@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
       ver: 1.2,
       feed: "raw_images",
       feedtype: "json",
-      category: "mars2020,ingenunity",
+      category: "mars2020,ingenuity",
       latest: true,
     },
   });
@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
       ver: 1.2,
       feed: "raw_images",
       feedtype: "json",
-      category: "mars2020,ingenunity",
+      category: "mars2020,ingenuity",
       num: 1,
     },
   });
@@ -45,28 +45,67 @@ export default defineEventHandler(async (event) => {
       max_date: perseveranceLatest.latest,
       total_photos: perserveranceTotalPhotos.total_results,
       cameras: {
-        NAVCAM_LEFT:  { name: "Navigation Camera - Left", filter: "NAVCAM_LEFT" },
-        NAVCAM_RIGHT: { name: "Navigation Camera - Right", filter: "NAVCAM_RIGHT" },
-        FRONT_HAZCAM_LEFT: { name: "Front Hazard Avoidance Camera - Left", filter: "FRONT_HAZCAM_LEFT_A|FRONT_HAZCAM_LEFT_B" },
-        FRONT_HAZCAM_RIGHT:{ name: "Front Hazard Avoidance Camera - Right", filter: "FRONT_HAZCAM_RIGHT_A|FRONT_HAZCAM_RIGHT_B" },
-        REAR_HAZCAM_LEFT: { name:"Rear Hazard Avoidance Camera - Left", filter: "REAR_HAZCAM_LEFT" },
-        REAR_HAZCAM_RIGHT: { name:"Rear Hazard Avoidance Camera - Right", filter: "|REAR_HAZCAM_RIGHT" },
-        CACHECAM: { name:"Sample Caching System (CacheCam)", filter: "CACHECAM" },
-        MCZ_LEFT: { name:"Mast Camera Zoom - Left", filter: "MCZ_LEFT" },
-        MCZ_RIGHT: { name:"Mast Camera Zoom - Right", filter: "MCZ_RIGHT" },
-        SKYCAM: { name:"MEDA Skycam", filter: "SKYCAM" },
-        PIXL_MCC: { name:"PIXL Micro Context Camera", filter: "PIXL_MCC" },
-        SHERLOC_WATSON: { name:"SHERLOC WATSON Camera", filter: "SHERLOC_WATSON" },
-        SHERLOC_CI: { name:"SHERLOC Context Imager", filter: "SHERLOC_ACI" },
-        SUPERCAM_RMI: { name:"SuperCam Remote Micro Imager", filter: "SUPERCAM_RMI" },
-        EDL_PUCAM1: { name:"Parachute Up-Look Camera A", filter: "EDL_PUCAM1" },
-        EDL_PUCAM2: { name:"Parachute Up-Look Camera B", filter: "EDL_PUCAM2" },
-        EDL_DDCAM: { name:"Descent Stage Down-Look Camera", filter: "EDL_DDCAM" },
-        EDL_RUCAM: { name:"Rover Up-Look Camera", filter: "EDL_RUCAM" },
-        EDL_RDCAM: { name:"Rover Down-Look Camera", filter: "EDL_RDCAM" },
-        LCAM: { name:"Lander Vision System Camera", filter: "LCAM" },
-        HELI_NAV: { name:"Mars Helicopter Navigation Camera", filter: "HELI_NAV" },
-        HELI_RTE: { name:"Mars Helicopter Color Camera", filter: "HELI_RTE" },
+        NAVCAM_LEFT: {
+          name: "Navigation Camera - Left",
+          filter: "NAVCAM_LEFT",
+        },
+        NAVCAM_RIGHT: {
+          name: "Navigation Camera - Right",
+          filter: "NAVCAM_RIGHT",
+        },
+        FRONT_HAZCAM_LEFT: {
+          name: "Front Hazard Avoidance Camera - Left",
+          filter: "FRONT_HAZCAM_LEFT_A|FRONT_HAZCAM_LEFT_B",
+        },
+        FRONT_HAZCAM_RIGHT: {
+          name: "Front Hazard Avoidance Camera - Right",
+          filter: "FRONT_HAZCAM_RIGHT_A|FRONT_HAZCAM_RIGHT_B",
+        },
+        REAR_HAZCAM_LEFT: {
+          name: "Rear Hazard Avoidance Camera - Left",
+          filter: "REAR_HAZCAM_LEFT",
+        },
+        REAR_HAZCAM_RIGHT: {
+          name: "Rear Hazard Avoidance Camera - Right",
+          filter: "|REAR_HAZCAM_RIGHT",
+        },
+        CACHECAM: {
+          name: "Sample Caching System (CacheCam)",
+          filter: "CACHECAM",
+        },
+        MCZ_LEFT: { name: "Mast Camera Zoom - Left", filter: "MCZ_LEFT" },
+        MCZ_RIGHT: { name: "Mast Camera Zoom - Right", filter: "MCZ_RIGHT" },
+        SKYCAM: { name: "MEDA Skycam", filter: "SKYCAM" },
+        PIXL_MCC: { name: "PIXL Micro Context Camera", filter: "PIXL_MCC" },
+        SHERLOC_WATSON: {
+          name: "SHERLOC WATSON Camera",
+          filter: "SHERLOC_WATSON",
+        },
+        SHERLOC_CI: { name: "SHERLOC Context Imager", filter: "SHERLOC_ACI" },
+        SUPERCAM_RMI: {
+          name: "SuperCam Remote Micro Imager",
+          filter: "SUPERCAM_RMI",
+        },
+        EDL_PUCAM1: {
+          name: "Parachute Up-Look Camera A",
+          filter: "EDL_PUCAM1",
+        },
+        EDL_PUCAM2: {
+          name: "Parachute Up-Look Camera B",
+          filter: "EDL_PUCAM2",
+        },
+        EDL_DDCAM: {
+          name: "Descent Stage Down-Look Camera",
+          filter: "EDL_DDCAM",
+        },
+        EDL_RUCAM: { name: "Rover Up-Look Camera", filter: "EDL_RUCAM" },
+        EDL_RDCAM: { name: "Rover Down-Look Camera", filter: "EDL_RDCAM" },
+        LCAM: { name: "Lander Vision System Camera", filter: "LCAM" },
+        HELI_NAV: {
+          name: "Mars Helicopter Navigation Camera",
+          filter: "HELI_NAV",
+        },
+        HELI_RTE: { name: "Mars Helicopter Color Camera", filter: "HELI_RTE" },
       },
       photo: "/perseverance.png",
     },
@@ -79,17 +118,35 @@ export default defineEventHandler(async (event) => {
       max_date: curiosityLatest.latest_data.latest,
       total_photos: curiosityTotalPhotos.total,
       cameras: {
-        NAVCAM_LEFT: "Navigation Camera - Left", // NAV_LEFT_A|NAV_LEFT_B
-        NAVCAM_RIGHT: "Navigation Camera - Right", // NAV_RIGHT_A|NAV_RIGHT_B
-        FRONT_HAZCAM_LEFT: "Front Hazard Avoidance Camera - Left", //FHAZ_LEFT_A|FHAZ_LEFT_B
-        FRONT_HAZCAM_RIGHT: "Front Hazard Avoidance Camera - Right", //FHAZ_RIGHT_A|FHAZ_RIGHT_B|
-        REAR_HAZCAM_LEFT: "Rear Hazard Avoidance Camera - Left", // RHAZ_LEFT_A|RHAZ_LEFT_B
-        REAR_HAZCAM_RIGHT: "Rear Hazard Avoidance Camera - Right", // RHAZ_RIGHT_A|RHAZ_RIGHT_B
-        CHEMCAM: "Chemistry & Camera", // CHEMCAM_RMI
-        MARDI: "Mars Descent Imager", // MARDI
-        MAHLI: "Mars Hand Lens Imager", // MAHLI
-        MCZ_LEFT: "Mast Camera Zoom - Left", // MAST_LEFT
-        MCZ_RIGHT: "Mast Camera Zoom - Right", // MAST_RIGHT
+        NAVCAM_LEFT: {
+          name: "Navigation Camera - Left",
+          filter: "NAV_LEFT_A|NAV_LEFT_B",
+        },
+        NAVCAM_RIGHT: {
+          name: "Navigation Camera - Right",
+          filter: "NAV_RIGHT_A|NAV_RIGHT_B",
+        },
+        FRONT_HAZCAM_LEFT: {
+          name: "Front Hazard Avoidance Camera - Left",
+          filter: "FHAZ_LEFT_A|FHAZ_LEFT_B",
+        },
+        FRONT_HAZCAM_RIGHT: {
+          name: "Front Hazard Avoidance Camera - Right",
+          filter: "FHAZ_RIGHT_A|FHAZ_RIGHT_B",
+        },
+        REAR_HAZCAM_LEFT: {
+          name: "Rear Hazard Avoidance Camera - Left",
+          filter: "RHAZ_LEFT_A|RHAZ_LEFT_B",
+        },
+        REAR_HAZCAM_RIGHT: {
+          name: "Rear Hazard Avoidance Camera - Right",
+          filter: "RHAZ_RIGHT_A|RHAZ_RIGHT_B",
+        },
+        CHEMCAM: { name: "Chemistry & Camera", filter: "CHEMCAM_RMI" },
+        MARDI: { name: "Mars Descent Imager", filter: "MARDI" },
+        MAHLI: { name: "Mars Hand Lens Imager", filter: "MAHLI" },
+        MCZ_LEFT: { name: "Mast Camera Zoom - Left", filter: "MAST_LEFT" },
+        MCZ_RIGHT: { name: "Mast Camera Zoom - Right", filter: "MAST_RIGHT" },
       },
       photo: "/curiosity.png",
     },
@@ -102,12 +159,14 @@ export default defineEventHandler(async (event) => {
       max_date: "2018-06-11",
       total_photos: 228298,
       cameras: {
-        FHAZ: "Front Hazard Avoidance Camera", // FHAZ
-        RHAZ: "Rear Hazard Avoidance Camera", // RHAZ
-        NAVCAM: "Navigation Camera", // NAVCAM
-        PANCAM: "Panoramic Camera", // PANCAM
-        MINITES: "Miniature Thermal Emission Spectrometer (Mini-TES)", // MINITEST
-        ENTRY: "Entry, Descent, and Landing Camera",
+        FHAZ: { name: "Front Hazard Avoidance Camera", filter: "FHAZ" },
+        RHAZ: { name: "Rear Hazard Avoidance Camera", filter: "RHAZ" },
+        NAVCAM: { name: "Navigation Camera", filter: "NAVCAM" },
+        PANCAM: { name: "Panoramic Camera", filter: "PANCAM" },
+        MINITES: {
+          name: "Thermal Emission Spectrometer",
+          filter: "MINITEST",
+        },
       },
       photo: "/spirit.png",
     },
@@ -120,12 +179,14 @@ export default defineEventHandler(async (event) => {
       max_date: "2010-03-21",
       total_photos: 128516,
       cameras: {
-        FHAZ: "Front Hazard Avoidance Camera", // FHAZ
-        RHAZ: "Rear Hazard Avoidance Camera", // RHAZ
-        NAVCAM: "Navigation Camera", // NAVCAM
-        PANCAM: "Panoramic Camera", // PANCAM
-        MINITES: "Miniature Thermal Emission Spectrometer (Mini-TES)", // MINITEST
-        ENTRY: "Entry, Descent, and Landing Camera",
+        FHAZ: { name: "Front Hazard Avoidance Camera", filter: "FHAZ" },
+        RHAZ: { name: "Rear Hazard Avoidance Camera", filter: "RHAZ" },
+        NAVCAM: { name: "Navigation Camera", filter: "NAVCAM" },
+        PANCAM: { name: "Panoramic Camera", filter: "PANCAM" },
+        MINITES: {
+          name: "Thermal Emission Spectrometer",
+          filter: "MINITEST",
+        },
       },
       photo: "/spirit.png",
     },
