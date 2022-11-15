@@ -27,8 +27,12 @@
       <a href="https://youtu.be/AZKcl4-tcuo">life on mars</a>.
     </p>
     <p>
-      All available photos loads from NASA's side using
-      <a href="https://github.com/chrisccerami/mars-photo-api/">This API</a>.
+      All available photos loads from NASA's side using their's own API for
+      Perseverance and Curiosity and
+      <a href="https://github.com/wvovaw/mars-exploration-rovers-photos-api"
+        >this API</a
+      >
+      for Opportunity and Spirit.
     </p>
   </div>
 </template>

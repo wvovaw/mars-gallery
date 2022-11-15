@@ -52,10 +52,10 @@
           class="dropdown-content menu menu-compact mt-3 p-2 shadow bg-base-200 rounded-box w-52"
         >
           <li tabindex="0" class="">
-            <NuxtLink to="/rovers" class=""
-              >Rovers
+            <a>
+              <NuxtLink to="/rovers">Rovers</NuxtLink>
               <Icon name="ion:ios-arrow-down" size="1em" />
-            </NuxtLink>
+            </a>
             <ul class="bg-base-300 px-2 mr-2 menu menu-compact relative left-1">
               <li><NuxtLink to="/rovers/Spirit" class="">Spirit</NuxtLink></li>
               <li>

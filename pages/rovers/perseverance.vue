@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useDebounceFn } from "@vueuse/core";
+
 definePageMeta({ layout: false });
 const roverName = "perseverance";
 
@@ -7,7 +9,6 @@ const roverName = "perseverance";
 const rover = (await $fetch(`/api/roversList`))[0];
 let data = ref<Record<string, any>>({ images: [] });
 let latest = await $fetch(`/api/perseveranceLatest`);
-console.log(latest);
 
 // - Filters
 const fromSol = ref<Number | undefined>(undefined);
@@ -31,7 +32,7 @@ const removeFilters = () => {
   selectedCameras.value = [];
 };
 
-const getPhotos = async () => {
+const getPhotos = useDebounceFn(async () => {
   const url =
     `/api/perseverance?` +
     new URLSearchParams({
@@ -48,7 +49,8 @@ const getPhotos = async () => {
     }).toString();
 
   data.value = await $fetch(url);
-};
+}, 600);
+
 const nextPage = () => {
   if (selectedPage.value < numOfPages.value) selectedPage.value++;
 };

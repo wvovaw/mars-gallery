@@ -8,7 +8,8 @@
         <div class="max-w-md">
           <h1 class="mb-5 text-5xl font-bold">Mars gallery</h1>
           <p class="mb-5">
-            The place where You can see all<sup>?</sup> photos from
+            A place where you can view all available photos of mars ever taken
+            by the nasa
             <a href="https://mars.nasa.gov/" class="hover:text-info"
               ><Icon name="simple-icons:nasa" size="2rem"
             /></a>

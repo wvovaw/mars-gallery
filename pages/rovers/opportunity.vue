@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useDebounceFn } from "@vueuse/core";
 definePageMeta({ layout: false });
 const roverName = "opportunity";
 
@@ -26,7 +27,7 @@ const removeFilters = () => {
   selectedCameras.value = [];
 };
 
-const getPhotos = async () => {
+const getPhotos = useDebounceFn(async () => {
   const params = {
     rover: roverName,
     page_limit: itemsPerPage.value,
@@ -46,7 +47,7 @@ const getPhotos = async () => {
 
   const url = `/api/mer?` + new URLSearchParams(params).toString();
   data.value = await $fetch(url);
-};
+}, 600);
 const nextPage = () => {
   if (selectedPage.value < numOfPages.value) selectedPage.value++;
 };
