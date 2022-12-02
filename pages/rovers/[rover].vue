@@ -1,17 +1,25 @@
 <script setup lang="ts">
 import { useDebounceFn } from "@vueuse/core";
+import { getRoverPhotos } from "@/lib/photosQuery";
+
 definePageMeta({ layout: false });
-const roverName = "spirit";
+const route = useRoute();
+const roverName = String(route.params.rover).toLowerCase();
+const isActiveRover = !["spirit", "opportunity"].includes(roverName as string);
 
 // Data
 // - Remote data
-const rover = (await $fetch(`/api/roversList`))[3];
+const rover = await $fetch(`/api/info?rover=${roverName}`);
+let data = ref<Record<string, any>>({ images: [] });
 
-let data = ref<Record<string, any>>({ photos: [] });
+let latest = {};
+if (isActiveRover) latest = await $fetch(`/api/latest?rover=${roverName}`);
 
 // - Filters
 const fromSol = ref<Number | undefined>(undefined);
 const toSol = ref<Number | undefined>(undefined);
+const showLatest = ref<boolean>(false);
+const selectedLatestSols = ref<Number[] | undefined>([]);
 const selectedCameras = ref<string[]>([]);
 const sortType = ref<string>("desc");
 const itemsPerPage = ref<number>(50);
@@ -24,30 +32,16 @@ const selectedPhoto = ref<String>("");
 const removeFilters = () => {
   fromSol.value = undefined;
   toSol.value = undefined;
+  selectedLatestSols.value = [];
+  showLatest.value = false;
   selectedCameras.value = [];
 };
 
-const getPhotos = useDebounceFn(async () => {
-  const params = {
-    rover: roverName,
-    page_limit: itemsPerPage.value,
-    page: selectedPage.value,
-    order: sortType.value,
-  };
-  if (selectedCameras.value.length != 0)
-    params["cameras"] = `[${selectedCameras.value.join(",")}]`;
+const getPhotos = useDebounceFn(
+  async () => (data.value = await getRoverPhotos(roverName, params.value)),
+  600
+);
 
-  let sol = "[";
-  if (fromSol.value != undefined && fromSol.value != "") sol += fromSol.value;
-  sol += ":";
-  if (toSol.value != undefined && toSol.value != "") sol += toSol.value;
-  sol += "]";
-  params["sol"] = sol;
-  console.log(sol);
-
-  const url = `/api/mer?` + new URLSearchParams(params).toString();
-  data.value = await $fetch(url);
-}, 600);
 const nextPage = () => {
   if (selectedPage.value < numOfPages.value) selectedPage.value++;
 };
@@ -56,10 +50,36 @@ const prevPage = () => {
 };
 
 // Computed
-const photosLinks = computed(() => data.value.photos.map((item) => item.url));
-
+const params = computed(() => {
+  if (isActiveRover)
+    return {
+      sortType: sortType.value,
+      fromSol: fromSol.value,
+      toSol: toSol.value,
+      showLatest: showLatest.value,
+      selectedLatestSols: selectedLatestSols.value,
+      itemsPerPage: itemsPerPage.value,
+      selectedPage: selectedPage.value,
+      selectedCameras: selectedCameras.value.map(
+        (cam) => rover.cameras[cam]["filter"]
+      ),
+    };
+  else
+    return {
+      page_limit: itemsPerPage.value,
+      page: selectedPage.value,
+      order: sortType.value,
+      selectedCameras: selectedCameras.value,
+      fromSol: fromSol.value,
+      toSol: toSol.value,
+    };
+});
+const photosLinks = computed(() => data.value.fullres ?? []);
+const photosPreviews = computed(() => data.value.previews ?? []);
 const totalResults = computed(() => data.value.total_results);
-const numOfPages = computed(() => data.value.total_pages);
+const numOfPages = computed(() =>
+  Math.ceil(Number(data.value.total_results) / Number(data.value.per_page))
+);
 const solRangeFilterString = computed(() => {
   // BUG: WHY THE FUCK ref<number | undefined>().value may become a string
   if (
@@ -81,6 +101,7 @@ const solRangeFilterString = computed(() => {
 // Watch
 const stopUpdates = watchEffect(() => {
   console.group("Fliters");
+  console.log("Show latest: ", showLatest.value);
   console.log("fromSol: ", fromSol.value);
   console.log("toSol: ", toSol.value);
   console.log("Cameras:  ", selectedCameras.value);
@@ -106,6 +127,22 @@ onBeforeMount(() => {
             >Filters:
             <div class="ml-2 badges flex flex-row flex-wrap gap-2">
               <div
+                v-for="sol in selectedLatestSols"
+                class="badge badge-outline badge-sm"
+              >
+                <Icon
+                  @click="
+                    selectedLatestSols = selectedLatestSols.filter(
+                      (i) => i != sol
+                    )
+                  "
+                  name="ion:close-sharp"
+                  class="cursor-pointer"
+                  size="1rem"
+                />
+                Sol: {{ sol }}
+              </div>
+              <div
                 v-if="solRangeFilterString != ''"
                 class="badge badge-outline badge-sm"
               >
@@ -122,7 +159,7 @@ onBeforeMount(() => {
               </div>
               <div
                 v-for="i in selectedCameras"
-                :key="rover.cameras[i]"
+                :key="i"
                 class="badge badge-outline badge-sm"
               >
                 <Icon
@@ -136,7 +173,11 @@ onBeforeMount(() => {
                 {{ i }}
               </div>
               <Icon
-                v-if="solRangeFilterString != '' || selectedCameras.length > 0"
+                v-if="
+                  solRangeFilterString != '' ||
+                  selectedLatestSols.length > 0 ||
+                  selectedCameras.length > 0
+                "
                 @click="removeFilters"
                 name="ion:trash"
                 class="cursor-pointer"
@@ -148,7 +189,7 @@ onBeforeMount(() => {
       </div>
       <div class="divider m-0"></div>
       <div class="pagination flex justify-between">
-        <label v-if="photosLinks.length > 0" class="label py-0 px-4">
+        <label class="label py-0 px-4">
           Showing {{ itemsPerPage * selectedPage + 1 }}-{{
             (selectedPage + 1) * itemsPerPage
           }}
@@ -195,11 +236,48 @@ onBeforeMount(() => {
               <option value="desc">Descending</option>
             </select>
           </label>
+          <label v-if="isActiveRover" class="cursor-pointer label">
+            <span class="label-text">Show latest</span>
+            <input
+              type="checkbox"
+              class="toggle toggle-secondary"
+              :checked="showLatest"
+              @change="
+                showLatest = showLatest == true ? false : true;
+                if (showLatest == true) selectedLatestSols = latest.latest_sols;
+                if (showLatest == false) selectedLatestSols = [];
+
+                fromSol = undefined;
+                toSol = undefined;
+              "
+            />
+          </label>
         </div>
         <label class="label px-4">
           <span class="label-text text-lg">Select sol</span>
         </label>
-        <div class="input-group-xs p-4">
+        <div v-if="showLatest" class="input-group-xs p-4">
+          <label
+            v-for="sol in latest.latest_sols"
+            class="cursor-pointer label py-0"
+          >
+            <input
+              type="checkbox"
+              class="checkbox checkbox-xs checkbox-secondary"
+              :checked="selectedLatestSols.includes(sol)"
+              @change="
+                selectedLatestSols.includes(sol)
+                  ? (selectedLatestSols = selectedLatestSols.filter(
+                      (i) => i != sol
+                    ))
+                  : selectedLatestSols.push(sol);
+                if (selectedLatestSols.length == 0) showLatest = false;
+              "
+            />
+            <span class="label-text">{{ sol }}</span>
+          </label>
+        </div>
+        <div v-else class="input-group-xs p-4">
           <label class="label">
             <span class="label-text-alt">From </span>
             <input
@@ -208,6 +286,7 @@ onBeforeMount(() => {
               :max="rover.max_sol"
               v-model.number="fromSol"
               class="input input-secondary input-bordered input-xs"
+              :disabled="showLatest"
             />
           </label>
           <label class="label">
@@ -218,6 +297,7 @@ onBeforeMount(() => {
               :max="rover.max_sol"
               v-model.number="toSol"
               class="input input-secondary input-bordered input-xs"
+              :disabled="showLatest"
             />
           </label>
         </div>
@@ -234,7 +314,7 @@ onBeforeMount(() => {
               type="checkbox"
               name="camera"
               class="checkbox checkbox-secondary checkbox-sm"
-              :value="value['filter']"
+              :value="key"
               v-model="selectedCameras"
             />
             <span class="label-text">{{ value["name"] }}</span>
@@ -244,7 +324,7 @@ onBeforeMount(() => {
     </template>
     <template #content>
       <div
-        v-if="photosLinks.length == 0"
+        v-if="photosPreviews.length == 0"
         class="drawer-content flex items-center justify-center"
       >
         <div class="alert alert-warning shadow-lg m-5 p-5">
@@ -272,7 +352,7 @@ onBeforeMount(() => {
         class="drawer-content grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 items-center justify-center"
       >
         <figure
-          v-for="(photo, ix) in photosLinks"
+          v-for="(photo, ix) in photosPreviews"
           :key="photo"
           class="p-3 rounded-xl shadow-xl grid justify-center"
           @click="selectedPhoto = photosLinks[ix]"
