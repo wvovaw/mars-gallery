@@ -116,6 +116,16 @@ const stopUpdates = watchEffect(() => {
 onBeforeMount(() => {
   getPhotos();
 });
+
+useHead({
+  title: roverName,
+  meta: [
+    {
+      name: roverName,
+      content: `Mars photo gallery: ${roverName}`,
+    },
+  ],
+});
 </script>
 
 <template>

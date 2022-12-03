@@ -1,4 +1,24 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { link } from "fs";
+
+const title = ref("Mars gallery");
+useHead({
+  title: title.value,
+  meta: [
+    {
+      name: "Mars photo gallery",
+      content: "Mars photo gallery",
+    },
+  ],
+  link: [
+    {
+      rel: "prefetch",
+      href: "hero.jpg",
+      as: "image",
+    },
+  ],
+});
+</script>
 
 <template>
   <div class="rovers">
