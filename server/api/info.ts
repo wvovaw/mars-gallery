@@ -28,9 +28,9 @@ const getPerseverance = async () => {
     landing_date: "2021-02-18",
     launch_date: "2020-07-30",
     status: "active",
-    max_sol: perseveranceLatest.latest_sol,
-    max_date: perseveranceLatest.latest,
-    total_photos: perserveranceTotalPhotos.total_results,
+    max_sol: perseveranceLatest.latest_sol as number,
+    max_date: perseveranceLatest.latest as string,
+    total_photos: perserveranceTotalPhotos.total_results as number,
     cameras: {
       NAVCAM_LEFT: {
         name: "Navigation Camera - Left",
@@ -118,9 +118,9 @@ const getCuriosity = async () => {
     landing_date: "2012-08-06",
     launch_date: "2011-11-26",
     status: "active",
-    max_sol: curiosityLatest.latest_data.latest_sol,
-    max_date: curiosityLatest.latest_data.latest,
-    total_photos: curiosityTotalPhotos.total,
+    max_sol: curiosityLatest.latest_data.latest_sol as number,
+    max_date: curiosityLatest.latest_data.latest as string,
+    total_photos: curiosityTotalPhotos.total as number,
     cameras: {
       NAVCAM_LEFT: {
         name: "Navigation Camera - Left",

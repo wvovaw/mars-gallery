@@ -7,7 +7,7 @@
     </div>
     <div class="navbar-center">
       <NuxtLink to="/" class="btn btn-ghost normal-case text-xl">
-        <Icon name="fa6-solid:shuttle-space" size="2em" />
+        <Icon name="game-icons:mars-curiosity" size="2em" />
       </NuxtLink>
     </div>
     <div class="navbar-end">
@@ -51,11 +51,11 @@
           tabindex="0"
           class="dropdown-content menu menu-compact mt-3 p-2 shadow bg-base-200 rounded-box w-52"
         >
-          <li tabindex="0" class="">
-            <a>
+          <li tabindex="0">
+            <ul>
               <NuxtLink to="/rovers">Rovers</NuxtLink>
               <Icon name="ion:ios-arrow-down" size="1em" />
-            </a>
+            </ul>
             <ul class="bg-base-300 px-2 mr-2 menu menu-compact relative left-1">
               <li><NuxtLink to="/rovers/Spirit" class="">Spirit</NuxtLink></li>
               <li>

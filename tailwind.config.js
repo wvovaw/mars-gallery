@@ -13,14 +13,14 @@ module.exports = {
     utils: true,
     logs: true,
     prefix: "",
-    darkTheme: "halloween",
+    darkTheme: "dark",
     themes: [
       "light",
-      "dark",
+      "dark", // Nice dark theme
       "cupcake",
       "bumblebee",
       "emerald",
-      "corporate",
+      "corporate", // Nice light theme
       "synthwave",
       "retro",
       "cyberpunk",
@@ -28,17 +28,17 @@ module.exports = {
       "halloween",
       "garden",
       "forest",
-      "aqua",
-      "lofi",
-      "pastel",
+      "aqua", // Nice blueprint
+      "lofi", // Nice minimal b&w
+      "pastel", // girls gonna like this theme
       "fantasy",
-      "wireframe",
-      "black",
+      "wireframe", // Nice minimal light theme witch comic sans font
+      "black", // True black theme
       "luxury",
-      "dracula",
+      "dracula", // Nice dark theme
       "cmyk",
       "autumn",
-      "business",
+      "business", // Nice strict black theme (opposite to corporate)
       "acid",
       "lemonade",
       "night",

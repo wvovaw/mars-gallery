@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const getPerseverance = async () => {
+const getPerseverance = async () : Promise<Record<string, any>> => {
   const { data } = await axios({
     paramsSerializer: {
       encode: (params) => params,
@@ -19,13 +19,13 @@ const getPerseverance = async () => {
   return data;
 };
 
-const getCuriosity = async () => {
+const getCuriosity = async () : Promise<Record<string, any>> => {
   const { data } = await axios({
     url: `https://mars.nasa.gov/api/v1/raw_image_items/msl/latest/`,
     method: "GET",
   });
 
-  return data;
+  return data.latest_data;
 };
 
 export default defineEventHandler(async (event) => {

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const getPerseverance = async (params) => {
+const getPerseverance = async (params: Record<string, any>): Promise<Record<string, any>> => {
   const { data } = await axios({
     paramsSerializer: {
       encode: (params) => params,
@@ -21,12 +21,10 @@ const getPerseverance = async (params) => {
     },
   });
 
-  // console.log(data);
-
   return data;
 };
 
-const getCuriosity = async (params) => {
+const getCuriosity = async (params: Record<string, any>): Promise<Record<string,any>> => {
   const { data } = await axios({
     paramsSerializer: {
       encode: (params) => params,
@@ -47,7 +45,7 @@ const getCuriosity = async (params) => {
   return data;
 };
 
-const getMer = async (rover, params) => {
+const getMer = async (rover: "opportunity" | "spirit", params: Record<string, any>): Promise<Record<string, any>> => {
   const { data } = await axios({
     paramsSerializer: {
       encode: (params) => params,
@@ -58,7 +56,7 @@ const getMer = async (rover, params) => {
       rover: rover,
       cameras: params.cameras,
       page_limit: params.page_limit,
-      page: String(Number(params.page) + 1),
+      page: params.page + 1,
       sol: params.sol,
       order: params.order,
     },

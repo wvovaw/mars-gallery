@@ -1,23 +1,4 @@
 <script lang="ts" setup>
-import { link } from "fs";
-
-const title = ref("Mars gallery");
-useHead({
-  title: title.value,
-  meta: [
-    {
-      name: "Mars photo gallery",
-      content: "Mars photo gallery",
-    },
-  ],
-  link: [
-    {
-      rel: "prefetch",
-      href: "hero.jpg",
-      as: "image",
-    },
-  ],
-});
 </script>
 
 <template>
@@ -58,17 +39,17 @@ useHead({
         </div>
       </div>
     </div>
-    <div class="grid grid-cols-1 md:mx-32">
+    <div class="max-w-[1280px] mx-auto">
       <div class="card bg-base-200 shadow-xl m-10 xl:card-side md:p-10">
         <figure>
           <img
-            class="w-96"
+            class="w-[36rem]"
             src="/perseverance.png"
             alt="Perseverance"
             loading="eager"
           />
         </figure>
-        <div class="card-body bg-base-300 rounded-xl">
+        <div class="card-body xl:w-36 bg-base-300 rounded-xl">
           <h2 class="card-title">
             Perseverance
             <div class="badge badge-success">Active</div>
@@ -91,7 +72,7 @@ useHead({
       <div
         class="card bg-base-200 shadow-xl m-10 xl:card-side md:p-10 flex flex-col-reverse"
       >
-        <div class="card-body bg-base-300 rounded-xl">
+        <div class="card-body xl:w-36 bg-base-300 rounded-xl">
           <h2 class="card-title">
             Curiosity
             <div class="badge badge-success">Active</div>
@@ -111,7 +92,7 @@ useHead({
         </div>
         <figure class="sm:relative">
           <img
-            class="w-96"
+            class="w-[36rem]"
             src="/curiosity.png"
             alt="Curiosity"
             loading="eager"
@@ -122,12 +103,12 @@ useHead({
         <figure>
           <img
             src="/spirit.png"
-            class="w-96"
+            class="w-[36rem]"
             alt="Opportunity"
             loading="eager"
           />
         </figure>
-        <div class="card-body bg-base-300 rounded-xl">
+        <div class="card-body xl:w-36 bg-base-300 rounded-xl">
           <h2 class="card-title">
             Opportunity
             <div class="badge badge-error">Finished</div>
@@ -152,7 +133,7 @@ useHead({
       <div
         class="card bg-base-200 shadow-xl m-10 xl:card-side md:p-10 flex flex-col-reverse"
       >
-        <div class="card-body bg-base-300 rounded-xl">
+        <div class="card-body xl:w-36 bg-base-300 rounded-xl">
           <h2 class="card-title">
             Spirit
             <div class="badge badge-error">Finished</div>
@@ -177,7 +158,7 @@ useHead({
         <figure>
           <img
             src="/spirit.png"
-            class="w-96"
+            class="w-[36rem]"
             alt="Opportunity"
             loading="eager"
           />
