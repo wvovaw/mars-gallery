@@ -13,7 +13,7 @@ module.exports = {
     utils: true,
     logs: true,
     prefix: "",
-    darkTheme: "dark",
+    darkTheme: "black",
     themes: [
       "light",
       "dark", // Nice dark theme
